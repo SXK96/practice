@@ -1,0 +1,58 @@
+#include<iostream>
+using namespace std;
+
+class MyInteger
+{
+	friend ostream& operator<<(ostream& out, MyInteger num);
+public:
+	MyInteger()
+	{
+		m_a = 5;
+	}
+	//前置--
+	MyInteger& operator--()
+	{
+		m_a--;
+		return *this;
+	}
+
+	//后置--
+	MyInteger operator--(int)
+	{
+		MyInteger temp = *this;
+		m_a--;
+		return temp;
+	}
+private:
+	int m_a;
+};
+
+ostream& operator<<(ostream &out,MyInteger num)
+{
+	out << num.m_a;
+	return out;
+}
+
+//前置-- 先--再返回
+void test01() 
+{
+	MyInteger num;
+	cout << --num << endl;
+	cout << num << endl;
+}
+
+//后置-- 先返回再--
+void test02()
+{
+	MyInteger num;
+	cout << num-- << endl;
+	cout << num << endl;
+}
+int main() {
+	
+	//test01();
+	test02();
+	
+	system("pause");
+	return 0;
+}
